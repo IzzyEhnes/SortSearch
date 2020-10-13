@@ -25,9 +25,6 @@ public class Main
     static void bubbleSort(int[][] inArray)
     {
         int rows = inArray.length;
-        int cols = inArray[0].length;
-
-        boolean swap = false;
 
         for (int i = 0; i < rows - 1; i++)
         {
@@ -42,6 +39,7 @@ public class Main
 
         printArray(inArray);
     }
+
 
 
 
