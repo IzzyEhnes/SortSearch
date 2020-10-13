@@ -35,14 +35,28 @@ public class Main
             {
                 if (inArray[j][0] > inArray[j + 1][0])
                 {
-                    int temp = inArray[j][i];
-                    inArray[j][i] = inArray[j + 1][i];
-                    inArray[j + 1][i] = temp;
+                    inArray = swapRows(inArray, j, (j + 1));
                 }
             }
         }
 
         printArray(inArray);
+    }
+
+
+
+
+
+    static int[][] swapRows(int[][] inArray, int row1, int row2)
+    {
+        for (int i = 0; i < inArray.length - 1; i++)
+        {
+            int temp = inArray[row1][i];
+            inArray[row1][i] = inArray[row2][i];
+            inArray[row2][i] = temp;
+        }
+
+        return inArray;
     }
 
 
