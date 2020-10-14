@@ -45,6 +45,33 @@ public class Main
 
 
 
+
+    static void selectionSort(int[][] inArray)
+    {
+        int rows = inArray.length;
+
+        for (int i = 0; i < rows - 1; i++)
+        {
+            int minIndex = i;
+            for (int j = i + 1; j < rows; j++)
+            {
+                if (inArray[j][1] > inArray[minIndex][1])
+                {
+                    minIndex = j;
+                }
+            }
+
+            inArray = swapRows(inArray, i, minIndex);
+        }
+
+        printArray(inArray);
+    }
+
+
+
+
+
+
     static int[][] swapRows(int[][] inArray, int row1, int row2)
     {
         for (int i = 0; i < inArray.length - 1; i++)
@@ -72,5 +99,8 @@ public class Main
 
         System.out.println("After bubble sort based on first column: ");
         bubbleSort(array);
+
+        System.out.println("\nAfter selection sort based on second column: ");
+        selectionSort(array);
     }
 }
