@@ -72,6 +72,29 @@ public class Main
 
 
 
+    static void shellSort(int[][] inArray)
+    {
+        int rows = inArray.length;
+        int temp;
+        for (int gap = rows / 2; gap >= 1; gap /= 2)
+        {
+            for (int i = gap; i < rows; i++)
+            {
+                for (int j = i; j >= gap && inArray[j - gap][2] > inArray[j][2]; j -= gap)
+                {
+                    inArray = swapRows(inArray, (j - gap), j);
+                }
+            }
+        }
+
+        printArray(inArray);
+    }
+
+
+
+
+
+
     static int[][] swapRows(int[][] inArray, int row1, int row2)
     {
         for (int i = 0; i < inArray.length - 1; i++)
@@ -102,5 +125,8 @@ public class Main
 
         System.out.println("\nAfter selection sort based on second column: ");
         selectionSort(array);
+
+        System.out.println("\nAfter shell sort based on third column: ");
+        shellSort(array);
     }
 }
