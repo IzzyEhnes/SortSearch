@@ -22,22 +22,46 @@ public class Main
 
 
 
-    static void bubbleSort(int[][] inArray)
+    static int[][] copyArray(int[][] arrayCopy, int[][] inArray)
     {
         int rows = inArray.length;
+        int cols = inArray[0].length;
+
+        for (int i = 0; i < rows; i++)
+        {
+            for (int j = 0; j < cols; j++)
+            {
+                arrayCopy[i][j] = inArray[i][j];
+            }
+        }
+
+        return arrayCopy;
+    }
+
+
+
+
+
+
+    static void bubbleSort(int[][] inArray)
+    {
+        int[][] newArray = new int[5][4];
+        newArray = copyArray(newArray, inArray);
+
+        int rows = newArray.length;
 
         for (int i = 0; i < rows - 1; i++)
         {
             for (int j = 0; j < (rows - i - 1); j++)
             {
-                if (inArray[j][0] > inArray[j + 1][0])
+                if (newArray[j][0] > newArray[j + 1][0])
                 {
-                    inArray = swapRows(inArray, j, (j + 1));
+                    newArray = swapRows(newArray, j, (j + 1));
                 }
             }
         }
 
-        printArray(inArray);
+        printArray(newArray);
     }
 
 
@@ -48,23 +72,26 @@ public class Main
 
     static void selectionSort(int[][] inArray)
     {
-        int rows = inArray.length;
+        int[][] newArray = new int[5][4];
+        newArray = copyArray(newArray, inArray);
+
+        int rows = newArray.length;
 
         for (int i = 0; i < rows - 1; i++)
         {
             int minIndex = i;
             for (int j = i + 1; j < rows; j++)
             {
-                if (inArray[j][1] > inArray[minIndex][1])
+                if (newArray[j][1] > newArray[minIndex][1])
                 {
                     minIndex = j;
                 }
             }
 
-            inArray = swapRows(inArray, i, minIndex);
+            inArray = swapRows(newArray, i, minIndex);
         }
 
-        printArray(inArray);
+        printArray(newArray);
     }
 
 
@@ -74,20 +101,23 @@ public class Main
 
     static void shellSort(int[][] inArray)
     {
-        int rows = inArray.length;
-        int temp;
+        int[][] newArray = new int[5][4];
+        newArray = copyArray(newArray, inArray);
+
+        int rows = newArray.length;
+
         for (int gap = rows / 2; gap >= 1; gap /= 2)
         {
             for (int i = gap; i < rows; i++)
             {
-                for (int j = i; j >= gap && inArray[j - gap][2] > inArray[j][2]; j -= gap)
+                for (int j = i; j >= gap && newArray[j - gap][2] > newArray[j][2]; j -= gap)
                 {
-                    inArray = swapRows(inArray, (j - gap), j);
+                    newArray = swapRows(newArray, (j - gap), j);
                 }
             }
         }
 
-        printArray(inArray);
+        printArray(newArray);
     }
 
 
@@ -112,6 +142,7 @@ public class Main
 
 
 
+
     public static void main(String[] args)
     {
         int[][] array = {{5, 3, 2, 16}, {9, 8 ,10, 17}, {4, 7, 11, 18}, {2, 5, 9, 12}, {7, 9, 4, 10}};
@@ -128,5 +159,8 @@ public class Main
 
         System.out.println("\nAfter shell sort based on third column: ");
         shellSort(array);
+
+        System.out.println("\nAfter insertion sort based on fifth row: ");
+        insertionSort(array);
     }
 }
