@@ -1,3 +1,6 @@
+import java.util.Scanner;
+
+
 public class Main
 {
     static void printArray(int[][] inArray)
@@ -15,6 +18,19 @@ public class Main
 
                 System.out.println();
             }
+    }
+
+
+
+
+
+
+    static void printCol(int[][] inArray, int col)
+    {
+        for (int i = 0; i < inArray.length; i++)
+        {
+            System.out.println(inArray[i][col]);
+        }
     }
 
 
@@ -127,20 +143,17 @@ public class Main
 
     static void insertionSort(int[][] inArray)
     {
-        int[][] newArray = new int[5][4];
-        newArray = copyArray(newArray, inArray);
-
-        int cols = newArray[0].length;
+        int cols = inArray[0].length;
 
         for (int i = 1; i < cols; i++)
         {
-            for (int j = i; j > 0 && newArray[4][j] < newArray[4][j - 1]; j--)
+            for (int j = i; j > 0 && inArray[4][j] < inArray[4][j - 1]; j--)
             {
-                newArray = swapCols(newArray, j, (j - 1));
+                inArray = swapCols(inArray, j, (j - 1));
             }
         }
 
-        printArray(newArray);
+        printArray(inArray);
     }
 
 
@@ -182,6 +195,52 @@ public class Main
 
 
 
+    static void binarySearch(int[][] inArray, int target)
+    {
+        int high = inArray.length - 1;
+        int low = 0;
+        int targetColIndex = 0;
+
+        boolean found = false;
+
+        while (high >= low && !found)
+        {
+            int mid = (high + low) / 2;
+
+            if (target > inArray[4][mid])
+            {
+                low = mid + 1;
+            }
+
+            else if (target < inArray[4][mid])
+            {
+                high = mid - 1;
+            }
+
+            else
+            {
+                found = true;
+
+                targetColIndex = mid;
+            }
+        }
+
+        if (found)
+        {
+            printCol(inArray, targetColIndex);
+        }
+
+        else
+        {
+            System.out.println("That number was not found in row five of the array.");
+        }
+    }
+
+
+
+
+
+
     public static void main(String[] args)
     {
         int[][] array = {{5, 3, 2, 16}, {9, 8 ,10, 17}, {4, 7, 11, 18}, {2, 5, 9, 12}, {7, 9, 4, 10}};
@@ -201,5 +260,12 @@ public class Main
 
         System.out.println("\nAfter insertion sort based on fifth row: ");
         insertionSort(array);
+
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("\nWhat number are you searching for in the fifth row? ");
+        int target = scanner.nextInt();
+
+        binarySearch(array, target);
     }
 }
