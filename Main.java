@@ -125,6 +125,29 @@ public class Main
 
 
 
+    static void insertionSort(int[][] inArray)
+    {
+        int[][] newArray = new int[5][4];
+        newArray = copyArray(newArray, inArray);
+
+        int cols = newArray[0].length;
+
+        for (int i = 1; i < cols; i++)
+        {
+            for (int j = i; j > 0 && newArray[4][j] < newArray[4][j - 1]; j--)
+            {
+                newArray = swapCols(newArray, j, (j - 1));
+            }
+        }
+
+        printArray(newArray);
+    }
+
+
+
+
+
+
     static int[][] swapRows(int[][] inArray, int row1, int row2)
     {
         for (int i = 0; i < inArray.length - 1; i++)
@@ -137,6 +160,22 @@ public class Main
         return inArray;
     }
 
+
+
+
+
+
+    static int[][] swapCols(int[][] inArray, int col1, int col2)
+    {
+        for (int i = inArray[0].length; i >= 0; i--)
+        {
+            int temp = inArray[i][col1];
+            inArray[i][col1] = inArray[i][col2];
+            inArray[i][col2] = temp;
+        }
+
+        return inArray;
+    }
 
 
 
